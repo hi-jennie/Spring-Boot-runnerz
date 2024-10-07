@@ -38,4 +38,28 @@ public class RunRepository {
                 .filter(run -> run.id().equals(id))
                 .findFirst();
     }
+
+    void create(Run run) {
+        runs.add(run);
+    }
+
+    void update(Run run, Integer id) {
+        Optional<Run> existingRun = findById(run.id());
+        if(existingRun.isPresent()){
+           runs.set(runs.indexOf(existingRun.get()), run);
+        }
+    }
+
+    void delete(Integer id){
+        runs.removeIf(run -> run.id().equals(id));
+    }
+
+    /*
+    runs.removeIf(new Predicate<Run>() {
+    @Override
+    public boolean test(Run run) {
+        return run.id().equals(id);
+    }
+    });
+     */
 }

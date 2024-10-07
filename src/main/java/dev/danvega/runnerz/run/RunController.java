@@ -2,10 +2,7 @@ package dev.danvega.runnerz.run;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
@@ -41,8 +38,24 @@ public class RunController {
         return run.get();
     }
 
-//    @GetMapping("/hello")
-//    String hello() {
-//        return "Hello, Runnerz!";
-//    }
+    // 当客户端通过 POST 请求调用 create 方法时，假如操作成功，这个注解告诉服务器返回 HTTP 201 状态码。
+    // 这是标准的“创建成功”响应，意味着服务器已经成功创建了一个新的资源（比如一个数据库中的记录）
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    void create(@RequestBody Run run) {
+        runRepository.create(run);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    void update(@RequestBody Run run, @PathVariable Integer id) {
+        runRepository.update(run, id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable Integer id) {
+        runRepository.delete(id);
+    }
+
 }

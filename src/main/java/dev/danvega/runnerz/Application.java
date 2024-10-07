@@ -1,9 +1,16 @@
 package dev.danvega.runnerz;
 
+import dev.danvega.runnerz.run.Location;
+import dev.danvega.runnerz.run.Run;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @SpringBootApplication
 public class Application {
@@ -12,15 +19,22 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 		log.info("Application started successfully.");
-		/*
-		Logger (log): A tool for recording messages (log entries) during application execution.
-	•	LoggerFactory.getLogger(Application.class): Creates a logger associated with the Application class, helping to track where log messages originate.
-	•	Log Levels: Allow you to manage the severity of messages (INFO, DEBUG, ERROR, etc.).
-	•	Logging Output: Messages are printed to the console or written to a file, showing key information like timestamps, severity, and the class where the log was created.
-		 */
+	}
+
+	@Bean
+	CommandLineRunner runner(){
+		return args -> {
+			Run run = new Run(
+					1, "First Run",
+					LocalDateTime.now(),
+					LocalDateTime.now().plus(1, ChronoUnit.HOURS), 5,
+					Location.OUTDOOR);
+			log.info("Run: "+run);
+		};
 	}
 
 }
+
 /*
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
@@ -44,3 +58,11 @@ public class Application {
 
 }
 */
+
+
+/*
+		Logger (log): A tool for recording messages (log entries) during application execution.
+	•	LoggerFactory.getLogger(Application.class): Creates a logger associated with the Application class, helping to track where log messages originate.
+	•	Log Levels: Allow you to manage the severity of messages (INFO, DEBUG, ERROR, etc.).
+	•	Logging Output: Messages are printed to the console or written to a file, showing key information like timestamps, severity, and the class where the log was created.
+		 */

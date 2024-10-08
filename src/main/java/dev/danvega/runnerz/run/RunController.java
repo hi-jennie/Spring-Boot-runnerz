@@ -1,5 +1,6 @@
 package dev.danvega.runnerz.run;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class RunController {
         // Optional is more like a container for an object which may or may not be null.
         Optional<Run> run =  runRepository.findById(id);
         if(run.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.MULTI_STATUS, "Run not found");
+            throw new RunNotFoundException();
         }
 
         return run.get();
@@ -42,13 +43,15 @@ public class RunController {
     // 这是标准的“创建成功”响应，意味着服务器已经成功创建了一个新的资源（比如一个数据库中的记录）
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    void create(@RequestBody Run run) {
+    void create(@Valid @RequestBody Run run) {
         runRepository.create(run);
     }
+    // @Valid 注解告诉 Spring Boot 在调用 create 方法之前验证 run 对象。
+    // 根据 Run 类的定义，这意味着 Spring Boot 会检查 title 和 miles 字段是否符合定义的约束。
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    void update(@RequestBody Run run, @PathVariable Integer id) {
+    void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
         runRepository.update(run, id);
     }
 

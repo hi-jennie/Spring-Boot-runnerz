@@ -1,1 +1,24 @@
+### Find all runs
+GET http://localhost:8080/api/runs
+
+### Find run by id
 GET http://localhost:8080/api/runs/1
+
+### Find Run By Id that does not exist
+GET http://localhost:8080/api/runs/100
+
+### Create a new run
+POST http://localhost:8080/api/runs
+Content-Type: application/json
+
+{
+  "id": 3,
+  "title": "Third Run",
+  "startedOn": "2024-10-08T18:35:44.389708",
+  "completedOn": "2024-10-08T19:35:44.38971",
+  "miles": 10,
+  "location": "INDOOR"
+}
+
+###
+DELETE http://localhost:8080/api/runs/3

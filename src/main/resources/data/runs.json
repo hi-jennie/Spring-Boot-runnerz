@@ -1,0 +1,36 @@
+{
+  "runs": [
+    {
+      "id": 1,
+      "title": "First Run",
+      "startedOn": "2024-10-09T15:28:40.360925",
+      "completedOn": "2024-10-09T16:28:40.360936",
+      "miles": 5,
+      "location": "OUTDOOR"
+    },
+    {
+        "id": 2,
+        "title": "Second Run",
+        "startedOn": "2024-10-10T15:28:40.360925",
+        "completedOn": "2024-10-10T16:28:40.360936",
+        "miles": 10,
+        "location": "OUTDOOR"
+        },
+        {
+        "id": 3,
+        "title": "Third Run",
+        "startedOn": "2024-10-11T15:28:40.360925",
+        "completedOn": "2024-10-11T16:28:40.360936",
+        "miles": 15,
+        "location": "OUTDOOR"
+    },
+    {
+      "id": 4,
+      "title": "Fourth Run",
+      "startedOn": "2024-10-12T15:28:40.360925",
+      "completedOn": "2024-10-12T16:28:40.360936",
+      "miles": 20,
+      "location": "OUTDOOR"
+    }
+  ]
+}

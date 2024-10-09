@@ -1,14 +1,30 @@
 package dev.danvega.runnerz.run;
 
-import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+@Repository
+public class RunRepository{
+    private static final Logger log = LoggerFactory.getLogger(RunRepository.class);
+    // jdbc is more like a bridge between java and database
+    private final JdbcClient jdbcClient;
+    // dependency injection
+    public RunRepository(JdbcClient jdbcClient) {
+        this.jdbcClient = jdbcClient;
+    }
+
+    public List<Run> findAll(){
+        return jdbcClient.sql("select * from run")
+                .query(Run.class)// map to Run class
+                .list();
+    }
+}
+
+/* in memory database
 @Repository
 public class RunRepository {
     private List<Run> runs = new ArrayList<>();
@@ -54,12 +70,13 @@ public class RunRepository {
         runs.removeIf(run -> run.id().equals(id));
     }
 
-    /*
-    runs.removeIf(new Predicate<Run>() {
-    @Override
-    public boolean test(Run run) {
-        return run.id().equals(id);
-    }
-    });
-     */
+
+//    runs.removeIf(new Predicate<Run>() {
+//    @Override
+//    public boolean test(Run run) {
+//        return run.id().equals(id);
+//    }
+//    });
+
 }
+*/

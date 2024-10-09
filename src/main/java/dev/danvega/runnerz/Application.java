@@ -2,6 +2,7 @@ package dev.danvega.runnerz;
 
 import dev.danvega.runnerz.run.Location;
 import dev.danvega.runnerz.run.Run;
+import dev.danvega.runnerz.run.RunRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -22,14 +23,14 @@ public class Application {
 	}
 
 	@Bean
-	CommandLineRunner runner(){
+	CommandLineRunner runner(RunRepository runRepository){
 		return args -> {
 			Run run = new Run(
 					1, "First Run",
 					LocalDateTime.now(),
 					LocalDateTime.now().plus(1, ChronoUnit.HOURS), 5,
 					Location.OUTDOOR);
-			log.info("Run: "+run);
+			runRepository.create(run);
 		};
 	}
 

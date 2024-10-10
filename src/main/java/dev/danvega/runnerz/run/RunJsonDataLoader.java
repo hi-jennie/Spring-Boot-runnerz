@@ -25,6 +25,7 @@ public class RunJsonDataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if(runRepository.count()==0){
+            // read JSON data from .json file
             try(InputStream inputStream = TypeReference.class.getResourceAsStream("/data/runs.json")){
                 // convert JSON data to Run object separately, then save to in_memory collection in List<Run>,and use Runs(List<Run run)to wrap it
                 Runs allRuns = objectMapper.readValue(inputStream, Runs.class);

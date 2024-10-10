@@ -12,7 +12,7 @@ POST http://localhost:8080/api/runs
 Content-Type: application/json
 
 {
-  "id": 3,
+  "id": 5,
   "title": "Third Run",
   "startedOn": "2024-10-08T18:35:44.389708",
   "completedOn": "2024-10-08T19:35:44.38971",
@@ -21,4 +21,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/api/runs/3
+DELETE http://localhost:8080/api/runs/5

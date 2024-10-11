@@ -64,4 +64,7 @@ public class RunController {
     List<Run> findAllByLocation(@PathVariable String location) {
         return runRepository.findAllByLocation(location);
     }
+
+
+
 }

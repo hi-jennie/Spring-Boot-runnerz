@@ -7,10 +7,14 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @Repository
 public interface RunRepository extends ListCrudRepository<Run,Integer> {
+
     List<Run> findAllByLocation(String location);
+
+
 }

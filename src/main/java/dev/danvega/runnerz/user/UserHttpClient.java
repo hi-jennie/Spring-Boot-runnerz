@@ -13,3 +13,4 @@ public interface UserHttpClient {
     @GetExchange("/users/{id}")
     User findById(@PathVariable Integer id);
 }
+// this is service layer but it will get data from external APIs/external data
